@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { API_KEY, API_URL } from '../config';
-import { Cards } from './Cards';
+import { Cart } from './Cart';
+import { GoodsList } from './GoodsList';
+import { Preloader } from './Preloader';
 
 const Shop = () => {
-    const [items, setItems] = useState([]);
-    console.log(API_KEY, API_URL);
+    const [goods, setGoods] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         const requestOptions = {
             method: 'GET',
@@ -13,19 +16,14 @@ const Shop = () => {
         fetch(API_URL, requestOptions)
             .then((resp) => resp.json())
             .then((data) => {
-                setItems(data.shop);
-                console.log(data.shop);
+                data.shop && setGoods(data.shop);
+                setLoading(false);
             });
     }, []);
     return (
         <main className='container content'>
-            {items.map((item) => (
-                <Cards
-                    key={item.mainId}
-                    title={item.displayName}
-                    url={item.displayAssets[0].full_background}
-                />
-            ))}
+            <Cart />
+            {loading ? <Preloader /> : <GoodsList goods={goods} />}
         </main>
     );
 };
