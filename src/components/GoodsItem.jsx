@@ -1,8 +1,15 @@
 import React from 'react';
 
 const GoodsItem = (props) => {
-    const { mainId, displayName, displayDescription, displayAssets, price } =
-        props;
+    const {
+        mainId,
+        displayName,
+        displayDescription,
+        displayAssets,
+        price,
+        addBasket,
+    } = props;
+
     return (
         <div className='card' id={mainId}>
             <div className='card-image'>
@@ -13,7 +20,12 @@ const GoodsItem = (props) => {
                 <p>{displayDescription}</p>
             </div>
             <div className='card-action'>
-                <button className='btn'>Buy it</button>
+                <button
+                    className='btn'
+                    onClick={() => addBasket({ mainId, displayName, price })}
+                >
+                    Buy it
+                </button>
                 <span className='right' style={{ fontSize: '1.8rem' }}>
                     {price.finalPrice} rub.
                 </span>

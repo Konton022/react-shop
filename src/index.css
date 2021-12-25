@@ -38,10 +38,17 @@ bottom: 2rem;
 right: 2rem;
 z-index: 5;
 cursor: pointer;
-width: 75px;
-height: 75px;
+
+
+}
+
+@media (min-width: 767px){
+  .cart {
+    top: 5rem;
+    bottom: unset;
+  }
 }
 
 .cart-quantity {
-
+ flex-grow: 1;
 }

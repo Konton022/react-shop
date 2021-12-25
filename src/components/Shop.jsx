@@ -7,6 +7,14 @@ import { Preloader } from './Preloader';
 const Shop = () => {
     const [goods, setGoods] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [order, setOrder] = useState([]);
+
+    const addBasket = (item) => {
+        let count = 1;
+
+        console.log('shop', item);
+        setOrder((prevState) => [...prevState, { item: item, count }]);
+    };
 
     useEffect(() => {
         const requestOptions = {
@@ -22,8 +30,12 @@ const Shop = () => {
     }, []);
     return (
         <main className='container content'>
-            <Cart />
-            {loading ? <Preloader /> : <GoodsList goods={goods} />}
+            <Cart quantity={order.length} />
+            {loading ? (
+                <Preloader />
+            ) : (
+                <GoodsList goods={goods} addBasket={addBasket} />
+            )}
         </main>
     );
 };
