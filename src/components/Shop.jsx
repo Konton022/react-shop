@@ -10,10 +10,22 @@ const Shop = () => {
     const [order, setOrder] = useState([]);
 
     const addBasket = (item) => {
-        let count = 1;
-
-        console.log('shop', item);
-        setOrder((prevState) => [...prevState, { item: item, count }]);
+        const orderIndex = order.findIndex(
+            (orderItem) => orderItem.mainId === item.mainId
+        );
+        if (orderIndex < 0) {
+            const newItem = { ...item, amount: 1 };
+            setOrder([...order, newItem]);
+        } else {
+            const newOrder = order.map((orderItem, index) => {
+                if (index === orderIndex) {
+                    return { ...orderItem, amount: orderItem.amount + 1 };
+                } else {
+                    return orderItem;
+                }
+            });
+            setOrder(newOrder);
+        }
     };
 
     useEffect(() => {
