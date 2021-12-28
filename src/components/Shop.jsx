@@ -8,6 +8,9 @@ const Shop = () => {
     const [goods, setGoods] = useState([]);
     const [loading, setLoading] = useState(true);
     const [order, setOrder] = useState([]);
+    const [ isBasketShow, setBasketShow] = useState(false)
+
+
 
     const addBasket = (item) => {
         const orderIndex = order.findIndex(
@@ -28,6 +31,8 @@ const Shop = () => {
         }
     };
 
+    const handleBasketShow = () => setBasketShow(!isBasketShow)
+
     useEffect(() => {
         const requestOptions = {
             method: 'GET',
@@ -42,7 +47,7 @@ const Shop = () => {
     }, []);
     return (
         <main className='container content'>
-            <Cart quantity={order.length} />
+            <Cart quantity={order.length} handleBasketShow={handleBasketShow}/>
             {loading ? (
                 <Preloader />
             ) : (
