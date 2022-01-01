@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { API_KEY, API_URL } from '../config';
+import BasketList from './BasketList';
 import { Cart } from './Cart';
 import { GoodsList } from './GoodsList';
 import { Preloader } from './Preloader';
@@ -8,9 +9,7 @@ const Shop = () => {
     const [goods, setGoods] = useState([]);
     const [loading, setLoading] = useState(true);
     const [order, setOrder] = useState([]);
-    const [ isBasketShow, setBasketShow] = useState(false)
-
-
+    const [isBasketShow, setBasketShow] = useState(false);
 
     const addBasket = (item) => {
         const orderIndex = order.findIndex(
@@ -31,7 +30,7 @@ const Shop = () => {
         }
     };
 
-    const handleBasketShow = () => setBasketShow(!isBasketShow)
+    const handleBasketShow = () => setBasketShow(!isBasketShow);
 
     useEffect(() => {
         const requestOptions = {
@@ -47,12 +46,14 @@ const Shop = () => {
     }, []);
     return (
         <main className='container content'>
-            <Cart quantity={order.length} handleBasketShow={handleBasketShow}/>
+            <Cart quantity={order.length} handleBasketShow={handleBasketShow} />
             {loading ? (
                 <Preloader />
             ) : (
                 <GoodsList goods={goods} addBasket={addBasket} />
             )}
+
+            <BasketList order={order} />
         </main>
     );
 };
