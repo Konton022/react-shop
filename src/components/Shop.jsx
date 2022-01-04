@@ -30,7 +30,12 @@ const Shop = () => {
         }
     };
 
-    const handleBasketShow = () => setBasketShow(!isBasketShow);
+    const handleBasketShow = () => setBasketShow((prevState) => !prevState);
+
+    const deleteOrderItem = (id) => {
+        console.log('delete item id:', id);
+        setOrder(order.filter((item) => item.mainId !== id));
+    };
 
     useEffect(() => {
         const requestOptions = {
@@ -52,8 +57,9 @@ const Shop = () => {
             ) : (
                 <GoodsList goods={goods} addBasket={addBasket} />
             )}
-
-            <BasketList order={order} />
+            {isBasketShow ? (
+                <BasketList order={order} deleteOrderItem={deleteOrderItem} />
+            ) : null}
         </main>
     );
 };
