@@ -1,13 +1,21 @@
 import React from 'react';
 
 const BasketItem = (props) => {
-    console.log('item props', props);
-    const { displayName, amount, price } = props;
+    const { displayName, amount, price, mainId, deleteOrderItem } = props;
 
     return (
-        <div>
-            {displayName} {price.regularPrice}rub. {amount}
-        </div>
+        <li className='collection-item'>
+            <div>
+                {displayName} X {amount} it. = {price.regularPrice * amount}{' '}
+                rub.
+                <i
+                    className='material-icons right'
+                    onClick={() => deleteOrderItem(mainId)}
+                >
+                    close
+                </i>
+            </div>
+        </li>
     );
 };
 
