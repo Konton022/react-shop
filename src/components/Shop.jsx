@@ -37,6 +37,29 @@ const Shop = () => {
         setOrder(order.filter((item) => item.mainId !== id));
     };
 
+    const changeOrderAmount = ({ mainId, type }) => {
+        const newOrder = order.map((item) => {
+            if (item.mainId === mainId) {
+                switch (type) {
+                    case 'remove':
+                        if (item.amount <= 1) {
+                            return item;
+                        } else {
+                            return { ...item, amount: item.amount - 1 };
+                        }
+                    case 'add':
+                        return { ...item, amount: item.amount + 1 };
+
+                    default:
+                        return item;
+                }
+            }
+            return item;
+        });
+        console.log('newOrder', newOrder);
+        setOrder(newOrder);
+    };
+
     useEffect(() => {
         const requestOptions = {
             method: 'GET',
@@ -58,7 +81,12 @@ const Shop = () => {
                 <GoodsList goods={goods} addBasket={addBasket} />
             )}
             {isBasketShow ? (
-                <BasketList order={order} deleteOrderItem={deleteOrderItem} />
+                <BasketList
+                    order={order}
+                    deleteOrderItem={deleteOrderItem}
+                    handleBasketShow={handleBasketShow}
+                    changeOrderAmount={changeOrderAmount}
+                />
             ) : null}
         </main>
     );
