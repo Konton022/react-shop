@@ -41,6 +41,11 @@ const BasketList = (props) => {
                     Total cost
                     <span className='right'> {totalPrice} rub.</span>
                 </li>
+                <li className='collection-item'>
+                    <div>
+                        <button className='btn-small'>checkout</button>
+                    </div>
+                </li>
             </ul>
         </div>
     );

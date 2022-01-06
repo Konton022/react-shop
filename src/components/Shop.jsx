@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { API_KEY, API_URL } from '../config';
+import { Alert } from './Alert';
 import BasketList from './BasketList';
 import { Cart } from './Cart';
 import { GoodsList } from './GoodsList';
@@ -10,8 +11,10 @@ const Shop = () => {
     const [loading, setLoading] = useState(true);
     const [order, setOrder] = useState([]);
     const [isBasketShow, setBasketShow] = useState(false);
+    const [alertName, setAlertName] = useState('');
 
     const addBasket = (item) => {
+        setAlertName(item.displayName);
         const orderIndex = order.findIndex(
             (orderItem) => orderItem.mainId === item.mainId
         );
@@ -88,6 +91,9 @@ const Shop = () => {
                     changeOrderAmount={changeOrderAmount}
                 />
             ) : null}
+            {alertName && (
+                <Alert name={alertName} setAlertName={setAlertName} />
+            )}
         </main>
     );
 };
