@@ -56,7 +56,7 @@ const Shop = () => {
             }
             return item;
         });
-        console.log('newOrder', newOrder);
+        // console.log('newOrder', newOrder);
         setOrder(newOrder);
     };
 

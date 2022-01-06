@@ -13,7 +13,7 @@ const BasketItem = (props) => {
     return (
         <li className='collection-item'>
             <div>
-                {displayName} X
+                {displayName}
                 <button
                     className='btn change-amount-btn'
                     onClick={() =>
@@ -22,7 +22,7 @@ const BasketItem = (props) => {
                 >
                     <i className='material-icons'>remove</i>
                 </button>
-                {amount}
+                x{amount}
                 <button
                     className='btn change-amount-btn'
                     onClick={() => changeOrderAmount({ mainId, type: 'add' })}
