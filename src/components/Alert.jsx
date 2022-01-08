@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 
 const Alert = (props) => {
-    const { name = '', setAlertName } = props;
+    const { name = '', closeAlert } = props;
 
     useEffect(() => {
-        const timerId = setTimeout(() => setAlertName(''), 3000);
+        const timerId = setTimeout(() => closeAlert(), 3000);
         return () => {
             clearTimeout(timerId);
         };

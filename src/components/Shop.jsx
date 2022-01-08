@@ -36,7 +36,7 @@ const Shop = () => {
     const handleBasketShow = () => setBasketShow((prevState) => !prevState);
 
     const deleteOrderItem = (id) => {
-        console.log('delete item id:', id);
+        // console.log('delete item id:', id);
         setOrder(order.filter((item) => item.mainId !== id));
     };
 
@@ -61,6 +61,10 @@ const Shop = () => {
         });
         // console.log('newOrder', newOrder);
         setOrder(newOrder);
+    };
+
+    const closeAlert = () => {
+        setAlertName('');
     };
 
     useEffect(() => {
@@ -91,9 +95,7 @@ const Shop = () => {
                     changeOrderAmount={changeOrderAmount}
                 />
             ) : null}
-            {alertName && (
-                <Alert name={alertName} setAlertName={setAlertName} />
-            )}
+            {alertName && <Alert name={alertName} closeAlert={closeAlert} />}
         </main>
     );
 };
