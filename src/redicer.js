@@ -1,7 +1,7 @@
 export function reducer(state, { type, payload }) {
     switch (type) {
         case 'ADD_TO_BASKET':
-            const {} = payload;
+            const { id, name, price } = payload;
             return {
                 ...state,
                 order: state.order.map(),
