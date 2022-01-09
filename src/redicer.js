@@ -1,5 +1,11 @@
 export function reducer(state, { type, payload }) {
     switch (type) {
+        case 'ADD_TO_BASKET':
+            const {} = payload;
+            return {
+                ...state,
+                order: state.order.map(),
+            };
         case 'INCREMENT_AMOUNT':
             return {
                 ...state,

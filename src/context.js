@@ -29,6 +29,16 @@ export const ContextProvider = ({ children }) => {
     value.decrementAmount = (mainId) => {
         dispatch({ type: 'DECREMENT_AMOUNT', payload: { id: mainId } });
     };
+    value.addToBasket = (item) => {
+        dispatch({
+            type: 'ADD_TO_BASKET',
+            payload: {
+                id: item.mainId,
+                name: item.displayName,
+                price: item.price,
+            },
+        });
+    };
 
     return (
         <ShopContext.Provider value={value}>{children}</ShopContext.Provider>
