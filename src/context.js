@@ -32,11 +32,7 @@ export const ContextProvider = ({ children }) => {
     value.addToBasket = (item) => {
         dispatch({
             type: 'ADD_TO_BASKET',
-            payload: {
-                id: item.mainId,
-                name: item.displayName,
-                price: item.price,
-            },
+            payload: item,
         });
     };
 

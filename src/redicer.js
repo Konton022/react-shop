@@ -1,11 +1,28 @@
 export function reducer(state, { type, payload }) {
     switch (type) {
         case 'ADD_TO_BASKET':
-            const { id, name, price } = payload;
+            const orderIndex = state.order.findIndex(
+                (orderItem) => orderItem.mainId === payload.mainId
+            );
+            let newOrder = null;
+            if (orderIndex < 0) {
+                const newItem = { ...payload, amount: 1 };
+                newOrder = [...state.order, newItem];
+            } else {
+                newOrder = state.order.map((orderItem, index) => {
+                    if (index === orderIndex) {
+                        return { ...orderItem, amount: orderItem.amount + 1 };
+                    } else {
+                        return orderItem;
+                    }
+                });
+            }
             return {
                 ...state,
-                order: state.order.map(),
+                order: newOrder,
+                alertName: payload.displayName,
             };
+
         case 'INCREMENT_AMOUNT':
             return {
                 ...state,
