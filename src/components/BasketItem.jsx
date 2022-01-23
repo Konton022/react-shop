@@ -1,14 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ShopContext } from '../context';
 
 const BasketItem = (props) => {
-    const {
-        displayName,
-        amount,
-        price,
-        mainId,
-        deleteOrderItem,
-        changeOrderAmount,
-    } = props;
+    const { displayName, amount, price, mainId } = props;
+    const { decrementAmount, incrementAmount, removeFromBasket } =
+        useContext(ShopContext);
 
     return (
         <li className='collection-item'>
@@ -16,16 +12,14 @@ const BasketItem = (props) => {
                 {displayName}
                 <button
                     className='btn change-amount-btn'
-                    onClick={() =>
-                        changeOrderAmount({ mainId, type: 'remove' })
-                    }
+                    onClick={() => decrementAmount(mainId)}
                 >
                     <i className='material-icons'>remove</i>
                 </button>
                 x{amount}
                 <button
                     className='btn change-amount-btn'
-                    onClick={() => changeOrderAmount({ mainId, type: 'add' })}
+                    onClick={() => incrementAmount(mainId)}
                 >
                     <i className='material-icons'>add</i>
                 </button>
@@ -33,7 +27,7 @@ const BasketItem = (props) => {
                 <span className='secondary-content'>
                     <i
                         className='material-icons'
-                        onClick={() => deleteOrderItem(mainId)}
+                        onClick={() => removeFromBasket(mainId)}
                     >
                         close
                     </i>
